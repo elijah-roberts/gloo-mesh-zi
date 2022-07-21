@@ -72,6 +72,12 @@ We will need 4 clusters
 You can use the basic script in ./misc to create them. 
 
 Note: The cluster should be able to create LB that are publicly reachable. or at least reachable to all the clusters listed above. 
+The Lb address of the Gloo Mesh service can be found using this command: 
+
+```bash
+kubectl --context ${mgmt_context} -n gloo-mesh get svc gloo-mesh-mgmt-server -o jsonpath='{.status.loadBalancer.ingress[0].*}'
+```
+Make sure that the address retrieved by the command above is reachable from all the other clusters, on port 9900. 
 
 After creating the clusters, rename the Kubernetes contexts to: 
 - mgmt: the management cluster 
